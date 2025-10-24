@@ -53,9 +53,9 @@
 
 ### **5 Missing differentiation between intra- and interspecific trait variability**
 
-Carmona et al. (2021) conclude that variation in aboveground traits exceeds that in belowground traits. However, they do not explicitly separate intra- from interspecific variation. Rodríguez-Alarcón et al. (2024) address this by analyzing intraspecific variation independently, showing that, for European herbaceous species, intraspecific variation in fine-root traits can exceed that in aboveground traits.
+* Carmona et al. (2021) conclude that variation in aboveground traits exceeds that in belowground traits. However, they do not explicitly separate intra- from interspecific variation. Rodríguez-Alarcón et al. (2024) address this by analyzing intraspecific variation independently, showing that, for European herbaceous species, intraspecific variation in fine-root traits can exceed that in aboveground traits.
 
-**Suggestion:**
-
-* Apply the method of Rodríguez-Alarcón et al. (2024) to the Carmona et al. dataset to partition trait variation into intra- and interspecific components and reassess the relative variability of above- and belowground traits.
+* **Suggestion:**
+    
+    * Apply the method of Rodríguez-Alarcón et al. (2024) to the Carmona et al. dataset to partition trait variation into intra- and interspecific components and reassess the relative variability of above- and belowground traits.
 
