@@ -43,8 +43,8 @@ Then they ask:
 
 The combined data show **four main axes**:
 
-- Two aboveground ones: *plant size* and *leaf economics*
-- Two belowground ones: *root tissue economics* and *root–fungal interaction strategies*
+- Two aboveground ones: *plant size (PC1)* and *leaf economic spectrum (PC2)*
+- Two belowground ones: *plant–fungal interactions in roots (PC3)* and *leaf economic spectrum (PC4)*
 
 These sets are **partly coordinated but not tightly aligned** — meaning above- and belowground strategies evolve somewhat independently.
 
