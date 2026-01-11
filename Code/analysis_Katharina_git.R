@@ -212,7 +212,7 @@ saveRDS(PCA_combined_tenth, paste0("../PCA_results/PCA_imputed_combined_tenth.rd
 #  now compare if PCA is stable, if not, no need to look at biome specific PCAs
 
 
-# 2. PCA below
+# 5. PCA imputed below
 imputed_below <- subset(imputed_data_clean, select = -c(la, ln, ph, sla, ssd, sm))
 
 gridSize <- 200
@@ -244,39 +244,11 @@ PCA_imputed_below$TPDs <- TPDsMean(species = rownames(PCA_imputed_below$traitsUs
 saveRDS(PCA_imputed_below, paste0("../PCA_results/PCA_imputed_below.rds"))
 
 
-# 3. PCA above
-imputed_above <- subset(imputed_data_clean, select = -c(SRL, D, RTD, N))# imputed data here less than not imputed data 
-
-gridSize <- 200
-PCA_imputed_above <- list()
-PCA_imputed_above$traits <- imputed_above
-PCA_imputed_above$dimensions <- paran(PCA_imputed_above$traits)$Retained
-PCA_imputed_above$means <- apply(PCA_imputed_above$traits, 2, mean)
-PCA_imputed_above$sds <- apply(PCA_imputed_above$traits, 2, sd)
-PCA_imputed_above$PCA <- psych::principal(scale(PCA_imputed_above$traits), nfactors=PCA_imputed_above$dimensions, 
-                                          rotate="varimax", covar = T)
-PCA_imputed_above$Variance <- PCA_imputed_above$PCA$Vaccounted[2,]
-sqrtEigen <- sqrt(colSums(PCA_imputed_above$PCA$loadings**2))
-for(i in 1:PCA_imputed_above$dimensions){
-  PCA_imputed_above$PCA$scores[, i] <- PCA_imputed_above$PCA$scores[, i] * sqrtEigen[i] 
-}
-# Loadings from psych::principal are expressed as eigenvectors * sqrt(eigenvalues). 
-# Let's express them as eigenvectors (without scale):
-sqrtEigenMat <- matrix(rep(sqrtEigen, nrow(PCA_imputed_above$PCA$loadings)), byrow=T, 
-                       nrow = nrow(PCA_imputed_above$PCA$loadings))
-PCA_imputed_above$PCA$loadings <- PCA_imputed_above$PCA$loadings / sqrtEigenMat
-# Check all are 1: colSums(PCAAbove$PCA$loadings**2)
-PCA_imputed_above$traitsUse <- data.frame(PCA_imputed_above$PCA$scores[, 1:PCA_imputed_above$dimensions])
-sdTraits <- sqrt(diag(Hpi.diag(PCA_imputed_above$traitsUse)))
-PCA_imputed_above$TPDs <- TPDsMean(species = rownames(PCA_imputed_above$traitsUse), 
-                                   means = PCA_imputed_above$traitsUse, 
-                                   sds = matrix(rep(sdTraits, nrow(PCA_imputed_above$traitsUse)), byrow=T, 
-                                                ncol=PCA_imputed_above$dimensions),
-                                   n_divisions = gridSize)
-saveRDS(PCA_imputed_above, paste0("../PCA_results/PCA_imputed_above.rds"))
+# imputed_above 
 
 
-# 4. PCA für imputed biomes (seperated), falls PCA stabil
+# PCA für imputed biomes (seperated), falls PCA stabil
+# 6. imputed continental
 gridSize <- 200
 PCA_imputed_continental <- list()
 PCA_imputed_continental$traits <- imputed_subset_continental_nobiome
@@ -305,7 +277,7 @@ PCA_imputed_continental$TPDs <- TPDsMean(species = rownames(PCA_imputed_continen
                                    n_divisions = gridSize)
 saveRDS(PCA_imputed_continental, paste0("../PCA_results/PCA_imputed_continental.rds"))
 
-
+# 7. imputed temperate
 gridSize <- 200
 PCA_imputed_temperate <- list()
 PCA_imputed_temperate$traits <- imputed_subset_temperate_nobiome
@@ -335,6 +307,7 @@ PCA_imputed_temperate$TPDs <- TPDsMean(species = rownames(PCA_imputed_temperate$
 saveRDS(PCA_imputed_temperate, paste0("../PCA_results/PCA_imputed_temperate.rds"))
 
 
+#8. imputed tropical
 gridSize <- 200
 PCA_imputed_tropical <- list()
 PCA_imputed_tropical$traits <- imputed_subset_tropical_nobiome
