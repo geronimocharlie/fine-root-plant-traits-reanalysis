@@ -21,11 +21,8 @@ if (!file.exists("data/imputedTraits.rds")) {
   stop("File not found: data/imputedTraits.rds")
 }
 
-if (!dir.exists("Outputs")) {
-  dir.create("Outputs")
-}
-if (!dir.exists("Outputs/PCA_results")) {
-  dir.create("Outputs/PCA_results", recursive = TRUE)
+if (!dir.exists("PCA_results")) {
+  dir.create("PCA_results", recursive = TRUE)
 }
 
 # Import data
@@ -125,7 +122,7 @@ perform_PCA <- function(traits_df, pca_name, gridSize = 100) {
                                            ncol=pca_list$dimensions),
                               n_divisions = gridSize)
     
-    output_file <- paste0("Outputs/PCA_results/", pca_name, ".rds")
+    output_file <- paste0("PCA_results/", pca_name, ".rds")
     saveRDS(pca_list, output_file)
     cat("Successfully saved:", output_file, "\n")
     return(pca_list)
