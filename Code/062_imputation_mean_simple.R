@@ -11,9 +11,9 @@ library(paran)
 source("code/Aux_Functions.R")
 
 # Load traitsUse, traitsSelect, and AllTraitsAllInfo from script 06
-traitsUse <- readRDS("data/traitsUse.rds")
-traitsSelect <- readRDS("data/traitsSelect.rds")
-AllTraitsAllInfo <- readRDS("data/imputedTraits.rds")
+traitsUse <- readRDS("Results/imputation/traitsUse.rds")
+traitsSelect <- readRDS("Results/imputation/traitsSelect.rds")
+AllTraitsAllInfo <- readRDS("Results/imputation/imputedTraits.rds")
 
 # 1) Compute means per trait (only from observed values)
 trait_means <- sapply(traitsUse[, traitsSelect], function(col){
@@ -29,7 +29,7 @@ for(j in colnames(imputedTraits_mean)){
 # 3) Create AllTraitsAllInfo with mean-imputed traits
 AllTraitsAllInfo_mean <- AllTraitsAllInfo
 AllTraitsAllInfo_mean[, traitsSelect] <- imputedTraits_mean
-saveRDS(AllTraitsAllInfo_mean, file = "data/imputedTraits_mean.rds")
+saveRDS(AllTraitsAllInfo_mean, file = "Results/imputation/imputedTraits_mean.rds")
 
 # 4) Run full PCA pipeline on mean-imputed data
 # (copied from 06_Imputed information spectrum.R for consistency)
@@ -148,8 +148,8 @@ PCATotal_mean$TPDs2D$Comp3_Comp4 <- TPDsMean(species = rownames(PCATotal_mean$tr
                                              n_divisions = 50)
 
 PCATotal_mean$Readme <- "PCATotal from mean imputation: simple baseline for comparison."
-saveRDS(PCATotal_mean, file = "data/PCATotal_mean_imputation.rds")
+saveRDS(PCATotal_mean, file = "Results/imputation/PCATotal_mean_imputation.rds")
 
 cat("Mean imputation done. Results saved to:\n")
-cat("  - data/imputedTraits_mean.rds\n")
-cat("  - data/PCATotal_mean_imputation.rds\n")
+cat("  - Results/imputation/imputedTraits_mean.rds\n")
+cat("  - Results/imputation/PCATotal_mean_imputation.rds\n")

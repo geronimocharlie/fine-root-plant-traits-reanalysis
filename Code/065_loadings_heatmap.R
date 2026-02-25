@@ -5,7 +5,7 @@
 # Cols: PC1..PC4
 # Cell: loading value; color by value; bold = largest |loading| in that trait/method
 #
-# Output: Figures/Loadings_heatmap.png
+# Output: Results/Tables/Loadings_heatmap.png
 #
 # Prerequisites: scripts 06, 061, 062, 063 (aggregated loadings summaries exist)
 
@@ -17,10 +17,10 @@ library(stringr)
 # -----------------------------------------------------------------------------
 # Load data
 # -----------------------------------------------------------------------------
-PCA_original <- readRDS("data/PCATotal_ImputedObs.rds")
-PCA_mean     <- readRDS("data/PCATotal_mean_imputation.rds")
-loadings_1x  <- readRDS("data/imputed_bootstrap/PCA_loadings_boot_summary.rds")
-loadings_2x  <- readRDS("data/imputed_bootstrap_2x/PCA_loadings_boot_summary.rds")
+PCA_original <- readRDS("Results/imputation/PCATotal_ImputedObs.rds")
+PCA_mean     <- readRDS("Results/imputation/PCATotal_mean_imputation.rds")
+loadings_1x  <- readRDS("Results/imputation/imputed_bootstrap/PCA_loadings_boot_summary.rds")
+loadings_2x  <- readRDS("Results/imputation/imputed_bootstrap_2x/PCA_loadings_boot_summary.rds")
 
 # Trait order (above lowercase, below uppercase)
 trait_order <- c("ph", "ssd", "sm", "la", "ln", "sla", "SRL", "D", "RTD", "N")
@@ -111,7 +111,7 @@ p <- ggplot(long_df, aes(PC, Trait, fill = sd)) +
 
 # # Save
 # dir.create("Figures", showWarnings = FALSE)
-# ggsave("Figures/Loadings_heatmap.png", p, width = 18, height = 16, units = "cm", dpi = 300)
+# ggsave("Results/Tables/Loadings_heatmap.png", p, width = 18, height = 16, units = "cm", dpi = 300)
 
 # Save one heatmap per imputation method
 for (m in levels(long_df$Method)) {
@@ -134,10 +134,10 @@ for (m in levels(long_df$Method)) {
       legend.position = "right"
     )
 
-  fname <- paste0("Figures/Loadings_heatmap_", gsub(" ", "_", m), ".png")
+  fname <- paste0("Results/Tables/Loadings_heatmap_", gsub(" ", "_", m), ".png")
   ggsave(fname, p_m, width = 9, height = 6, units = "cm", dpi = 300)
   cat("Saved:", fname, "\n")
 }
 
-cat("Saved: Figures/Loadings_heatmap.png\n")
+cat("Saved: Results/Tables/Loadings_heatmap.png\n")
 
