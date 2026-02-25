@@ -4,8 +4,6 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 
-setwd("C:/Users/katha/OneDrive/2_documents/4_Studium/EMDS_Semester3/Capstone")
-
 # PCA plot function (simple version)
 plotPCA <- function(PCA_dataset, 
                     axes = c(1,2), 
@@ -123,7 +121,7 @@ compute_kde_prob <- function(x, y, n = 200) {
 
 # ==== Pipeline =====
 fun_pipeline <- function(file_name, plot_name, rotation="varimax"){
-  PCA_file <- readRDS(paste0("./PCA_results/", file_name, ".rds"))
+  PCA_file <- readRDS(paste0("./Results/", file_name, ".rds"))
   plot_12 <- plotPCA(PCA_dataset = PCA_file,
                                            axes = c(1,2),
                                            probs = c(0.50, 0.95, 0.99),
@@ -155,39 +153,38 @@ fun_pipeline <- function(file_name, plot_name, rotation="varimax"){
   }}
 
 
-# # ==== Apply Pipeline ====
-# fun_pipeline("PCA_imputed_combined", "Imputed Full")
-# fun_pipeline("PCA_imputed_combined_half" , "Imputed Half")
-# fun_pipeline("PCA_imputed_combined_quarter", "Imputed Quarter")
-# fun_pipeline("PCA_imputed_combined_tenth", "Imputed Tenth")
-# # 
-# # # biomes GRooT
-# fun_pipeline("PCA_imputed_continental_groot", "Continental GRooT")
-# fun_pipeline("PCA_imputed_temperate_groot", "Temperate GRooT")
-# fun_pipeline("PCA_imputed_tropical_groot", "Tropical GRooT")
-# # 
-# # # 9 biomes
-# fun_pipeline("PCA_imputed_bf", "Boreal Forest")
-# fun_pipeline("PCA_imputed_tgd", "Temperate Grassland Desert")
-# fun_pipeline("PCA_imputed_trf", "Temperate Rain Forest")
-# fun_pipeline("PCA_imputed_troprf", "Tropical Rain Forest")
-# fun_pipeline("PCA_imputed_tropss", "Tropical Seasonal Forest Savanna")
-# fun_pipeline("PCA_imputed_tsf", "Temperate Seasonal Forest")
-# fun_pipeline("PCA_imputed_ws", "Woodland Shrubland")
-# fun_pipeline("PCA_imputed_sd", "Subtropical Desert")
-# # 
-# # # 9 biomes categorized
-# fun_pipeline("PCA_imputed_continental", "Continental")
-# fun_pipeline("PCA_imputed_temperate", "Temperate")
-# fun_pipeline("PCA_imputed_tropical", "Tropical")
-# fun_pipeline("PCA_imputed_multiple", "Multiple")
-# fun_pipeline("PCA_imputed_other", "Other")
+# ==== Apply Pipeline ====
+fun_pipeline("PCA_imputed_combined", "Imputed Full")
+fun_pipeline("PCA_imputed_combined_half" , "Imputed Half")
+fun_pipeline("PCA_imputed_combined_quarter", "Imputed Quarter")
+fun_pipeline("PCA_imputed_combined_tenth", "Imputed Tenth")
+
+# biomes GRooT
+fun_pipeline("PCA_imputed_continental_groot", "Continental GRooT")
+fun_pipeline("PCA_imputed_temperate_groot", "Temperate GRooT")
+fun_pipeline("PCA_imputed_tropical_groot", "Tropical GRooT")
+
+# 9 biomes
+fun_pipeline("PCA_imputed_bf", "Boreal Forest")
+fun_pipeline("PCA_imputed_tgd", "Temperate Grassland Desert")
+fun_pipeline("PCA_imputed_trf", "Temperate Rain Forest")
+fun_pipeline("PCA_imputed_troprf", "Tropical Rain Forest")
+fun_pipeline("PCA_imputed_tropss", "Tropical Seasonal Forest Savanna")
+fun_pipeline("PCA_imputed_tsf", "Temperate Seasonal Forest")
+fun_pipeline("PCA_imputed_ws", "Woodland Shrubland")
+fun_pipeline("PCA_imputed_sd", "Subtropical Desert")
+
+# 9 biomes categorized
+fun_pipeline("PCA_imputed_continental", "Continental")
+fun_pipeline("PCA_imputed_temperate", "Temperate")
+fun_pipeline("PCA_imputed_tropical", "Tropical")
+fun_pipeline("PCA_imputed_multiple", "Multiple")
+fun_pipeline("PCA_imputed_other", "Other")
 
 # ==== PART 2: LOADING TABLES ====
 # -----------------------------------------------------------------------------
 # Load data
 # -----------------------------------------------------------------------------
-setwd("C:/Users/katha/OneDrive/2_documents/4_Studium/EMDS_Semester3/Capstone")
 
 # Trait order (above lowercase, below uppercase)
 trait_order <- c("ph", "ssd", "sm", "la", "ln", "sla", "SRL", "D", "RTD", "N")
@@ -221,10 +218,10 @@ make_df <- function(mat, method, n, sd_mat = NULL) {
 
 
 # PCA stability
-PCA_combined <- readRDS("PCA_results/PCA_imputed_combined.rds")
-PCA_half     <- readRDS("PCA_results/PCA_imputed_combined_half.rds")
-PCA_quarter  <- readRDS("PCA_results/PCA_imputed_combined_quarter.rds")
-PCA_tenth  <- readRDS("PCA_results/PCA_imputed_combined_tenth.rds")
+PCA_combined <- readRDS("Results/PCA_imputed_combined.rds")
+PCA_half     <- readRDS("Results/PCA_imputed_combined_half.rds")
+PCA_quarter  <- readRDS("Results/PCA_imputed_combined_quarter.rds")
+PCA_tenth  <- readRDS("Results/PCA_imputed_combined_tenth.rds")
 
 load_original <- extract_load(PCA_combined$PCA$loadings, 4)
 load_half     <- extract_load(PCA_half$PCA$loadings, 4)
@@ -246,9 +243,9 @@ long_df1 <- long_df1 %>%
   ungroup()
 
 # biomes groot
-PCA_temperate_groot <- readRDS("PCA_results/PCA_imputed_temperate_groot.rds")
-PCA_continental_groot <- readRDS("PCA_results/PCA_imputed_continental_groot.rds")
-PCA_tropical_groot <- readRDS("PCA_results/PCA_imputed_tropical_groot.rds")
+PCA_temperate_groot <- readRDS("Results/PCA_imputed_temperate_groot.rds")
+PCA_continental_groot <- readRDS("Results/PCA_imputed_continental_groot.rds")
+PCA_tropical_groot <- readRDS("Results/PCA_imputed_tropical_groot.rds")
 
 load_temperate_groot <- extract_load(PCA_temperate_groot$PCA$loadings, 3)
 load_continental_groot <- extract_load(PCA_continental_groot$PCA$loadings, 3)
@@ -268,11 +265,11 @@ long_df_groot <- long_df_groot %>%
 
 
 # biomes categorized
-PCA_temperate <- readRDS("PCA_results/PCA_imputed_temperate.rds")
-PCA_continental <- readRDS("PCA_results/PCA_imputed_continental.rds")
-PCA_tropical <- readRDS("PCA_results/PCA_imputed_tropical.rds")
-PCA_multiple <- readRDS("PCA_results/PCA_imputed_multiple.rds")
-PCA_other <- readRDS("PCA_results/PCA_imputed_other.rds")
+PCA_temperate <- readRDS("Results/PCA_imputed_temperate.rds")
+PCA_continental <- readRDS("Results/PCA_imputed_continental.rds")
+PCA_tropical <- readRDS("Results/PCA_imputed_tropical.rds")
+PCA_multiple <- readRDS("Results/PCA_imputed_multiple.rds")
+PCA_other <- readRDS("Results/PCA_imputed_other.rds")
 
 load_temperate <- extract_load(PCA_temperate$PCA$loadings, 4)
 load_continental <- extract_load(PCA_continental$PCA$loadings, 3)
@@ -296,14 +293,14 @@ long_df2 <- long_df2 %>%
 
 
 # all 9 biomes
-PCA_bf <- readRDS("PCA_results/PCA_imputed_bf.rds")
-PCA_tgd <- readRDS("PCA_results/PCA_imputed_tgd.rds")
-PCA_trf <- readRDS("PCA_results/PCA_imputed_trf.rds")
-PCA_troprf <- readRDS("PCA_results/PCA_imputed_troprf.rds")
-PCA_tropss <- readRDS("PCA_results/PCA_imputed_tropss.rds")
-PCA_tsf <- readRDS("PCA_results/PCA_imputed_tsf.rds")
-PCA_ws <- readRDS("PCA_results/PCA_imputed_ws.rds")
-PCA_sd <- readRDS("PCA_results/PCA_imputed_sd.rds")
+PCA_bf <- readRDS("Results/PCA_imputed_bf.rds")
+PCA_tgd <- readRDS("Results/PCA_imputed_tgd.rds")
+PCA_trf <- readRDS("Results/PCA_imputed_trf.rds")
+PCA_troprf <- readRDS("Results/PCA_imputed_troprf.rds")
+PCA_tropss <- readRDS("Results/PCA_imputed_tropss.rds")
+PCA_tsf <- readRDS("Results/PCA_imputed_tsf.rds")
+PCA_ws <- readRDS("Results/PCA_imputed_ws.rds")
+PCA_sd <- readRDS("Results/PCA_imputed_sd.rds")
 
 load_bf <- extract_load(PCA_bf$PCA$loadings, 3)
 load_tgd <- extract_load(PCA_tgd$PCA$loadings, 4)
@@ -435,7 +432,8 @@ p4 <- ggplot(long_df_9b, aes(PC, Trait, fill = sd)) +
 
 # # Save
 dir.create("Figures", showWarnings = FALSE)
-ggsave("PCA_plots/Loadings_heatmap_bysize.png", p1, width = 18, height = 16, units = "cm", dpi = 300)
-ggsave("PCA_plots/Loadings_heatmap_bybiome_groot.png", p2, width = 18, height = 16, units = "cm", dpi = 300)
-ggsave("PCA_plots/Loadings_heatmap_bybiome.png", p3, width = 18, height = 16, units = "cm", dpi = 300)
-ggsave("PCA_plots/Loadings_heatmap_bybiome_9b.png", p4, width = 18, height = 16, units = "cm", dpi = 300)
+ggsave("Results/Figures/Loadings_heatmap_bysize.png", p1, width = 18, height = 16, units = "cm", dpi = 300)
+ggsave("Results/Figures/Loadings_heatmap_bybiome_groot.png", p2, width = 18, height = 16, units = "cm", dpi = 300)
+ggsave("Results/Figures/Loadings_heatmap_bybiome.png", p3, width = 18, height = 16, units = "cm", dpi = 300)
+ggsave("Results/Figures/Loadings_heatmap_bybiome_9b.png", p4, width = 18, height = 16, units = "cm", dpi = 300)
+
