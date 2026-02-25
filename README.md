@@ -1,6 +1,6 @@
 # Fine-Root Plant Traits Reanalysis
 
-This repository revisits the global plant trait spectrum by independently testing the robustness of aboveground–fine-root decoupling reported by Carmona et al. (2021). Through ordination, imputation, and uncertainty analyses, we show that the four-dimensional trait space is not an artefact of rotation, imputation, or ecological context, but a genuine feature of plant strategy diversity.
+This repository revisits the global plant trait spectrum by independently testing the robustness of aboveground–fine-root decoupling reported by Carmona et al. (2021). Through ordination and rotation analyses, uncertainty propagation and ecological subsetting, we show that the four-dimensional trait space is not an artefact of rotation, imputation, or ecological context, but a genuine feature of plant strategy diversity.
 
 ## Key Features
 - Reanalysis of the global spectrum of plant form and function (GSPFF)
