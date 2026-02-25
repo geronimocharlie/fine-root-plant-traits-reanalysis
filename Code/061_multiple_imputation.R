@@ -7,23 +7,23 @@
 # -------------------------------------------------------------------------
 # OUTPUT FILES PRODUCED BY THIS SCRIPT:
 # -------------------------------------------------------------------------
-## Results/imputation/imputedTraitsOOB.rds
+## Results/Imputation/imputedTraitsOOB.rds
 #   - Complete missForest object (mf) with ximp, OOBerror, etc.
 #
-# Results/imputation/imputed_bootstrap/imputed_single.rds
+# Results/Imputation/imputed_bootstrap/imputed_single.rds
 #   - AllTraitsAllInfo with the single (original) missForest imputation.
 #
-# Results/imputation/imputed_bootstrap/imputed_boot_001.rds ... imputed_boot_050.rds
+# Results/Imputation/imputed_bootstrap/imputed_boot_001.rds ... imputed_boot_050.rds
 #   - 50 bootstrap versions of AllTraitsAllInfo, each with slightly perturbed
 #     imputed values (parametric noise based on OOB errors).
 #
-# Results/imputation/imputed_bootstrap/PCATotal_ImputedObs_single.rds
+# Results/Imputation/imputed_bootstrap/PCATotal_ImputedObs_single.rds
 #   - PCATotal object for the single imputation (PCA scores, loadings, TPDs).
 #
-# Results/imputation/imputed_bootstrap/PCATotal_ImputedObs_boot_001.rds ... _boot_050.rds
+# Results/Imputation/imputed_bootstrap/PCATotal_ImputedObs_boot_001.rds ... _boot_050.rds
 #   - PCATotal objects for each bootstrap replicate (PCA scores, loadings, TPDs).
 #
-# Results/imputation/imputed_bootstrap/PCA_scores_boot_summary.rds
+# Results/Imputation/imputed_bootstrap/PCA_scores_boot_summary.rds
 #   - List containing 'mean' and 'sd' of PCA scores across all bootstraps
 #     (dimensions: species x 4 components).
 # -------------------------------------------------------------------------
@@ -40,9 +40,9 @@ library(ks)       # for Hpi.diag()
 source("code/Aux_Functions.R")
 
 # Load traitsAux and traitsSelect from script 06
-traitsAux <- readRDS("Results/imputation/traitsAux.rds")
-traitsSelect <- readRDS("Results/imputation/traitsSelect.rds")
-AllTraitsAllInfo <- readRDS("Results/imputation/imputedTraits.rds")
+traitsAux <- readRDS("Results/Imputation/traitsAux.rds")
+traitsSelect <- readRDS("Results/Imputation/traitsSelect.rds")
+AllTraitsAllInfo <- readRDS("Results/Imputation/imputedTraits.rds")
 
 # 1) run single missForest imputation + report OOB errors per variable
 mf <- missForest(xmis = traitsAux, variablewise = TRUE, verbose = TRUE)
@@ -50,7 +50,7 @@ ximp0 <- mf$ximp                      # full imputed matrix
 imputedTraitsMatrix <- ximp0[, traitsSelect] # select real traits (excludes phylo)
 names(mf$OOBerror) <- colnames(ximp0)
 oob_raw <- mf$OOBerror                # per-variable OOB
-saveRDS(mf, file = "Results/imputation/imputedTraitsOOB.rds")
+saveRDS(mf, file = "Results/Imputation/imputedTraitsOOB.rds")
 
 # 2) extract OOB only for real traits (exclude phylo PCs)
 oob_norm <- oob_raw[traitsSelect]
@@ -69,7 +69,7 @@ missing_mat <- is.na(as.matrix(traitsAux)) # logical matrix of missing positions
 
 # 5) Bootstrap settings
 nboot <- 50
-outdir <- "Results/imputation/imputed_bootstrap"
+outdir <- "Results/Imputation/imputed_bootstrap"
 dir.create(outdir, showWarnings = FALSE, recursive = TRUE)
 
 # helper-function to create PCATotal from AllTraitsAllInfo object (copied from 06_Imputed information spectrum.R line 60ff)
