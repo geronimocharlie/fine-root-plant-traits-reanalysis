@@ -17,10 +17,10 @@ library(stringr)
 # -----------------------------------------------------------------------------
 # Load data
 # -----------------------------------------------------------------------------
-PCA_original <- readRDS("Results/imputation/PCATotal_ImputedObs.rds")
-PCA_mean     <- readRDS("Results/imputation/PCATotal_mean_imputation.rds")
-loadings_1x  <- readRDS("Results/imputation/imputed_bootstrap/PCA_loadings_boot_summary.rds")
-loadings_2x  <- readRDS("Results/imputation/imputed_bootstrap_2x/PCA_loadings_boot_summary.rds")
+PCA_original <- readRDS("Results/Imputation/PCATotal_ImputedObs.rds")
+PCA_mean     <- readRDS("Results/Imputation/PCATotal_mean_imputation.rds")
+loadings_1x  <- readRDS("Results/Imputation/imputed_bootstrap/PCA_loadings_boot_summary.rds")
+loadings_2x  <- readRDS("Results/Imputation/imputed_bootstrap_2x/PCA_loadings_boot_summary.rds")
 
 # Trait order (above lowercase, below uppercase)
 trait_order <- c("ph", "ssd", "sm", "la", "ln", "sla", "SRL", "D", "RTD", "N")

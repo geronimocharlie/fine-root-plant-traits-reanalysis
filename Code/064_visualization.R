@@ -18,8 +18,8 @@ library(patchwork)  # for combining plots
 # -----------------------------------------------------------------------------
 # Load PCATotal objects
 # -----------------------------------------------------------------------------
-PCA_original <- readRDS("Results/imputation/PCATotal_ImputedObs.rds")
-PCA_mean     <- readRDS("Results/imputation/PCATotal_mean_imputation.rds")
+PCA_original <- readRDS("Results/Imputation/PCATotal_ImputedObs.rds")
+PCA_mean     <- readRDS("Results/Imputation/PCATotal_mean_imputation.rds")
 
 # For bootstrap methods: load aggregated mean scores/loadings and build pseudo-PCATotal
 # compute mean variance across all bootstraps
@@ -39,9 +39,9 @@ compute_variance_stats <- function(outdir) {
 }
 
 # 1x OOB
-scores_1x   <- readRDS("Results/imputation/imputed_bootstrap/PCA_scores_boot_summary.rds") # contains mean and sd of the species position over n bootstraps (this is going to be the scatter points & density)
-loadings_1x <- readRDS("Results/imputation/imputed_bootstrap/PCA_loadings_boot_summary.rds") # contains mean and sd of the trait loadings over n bootstraps + the single bootstrap loadings (this is going to be the arrows + labels)
-variance_1x <- compute_variance_stats("Results/imputation/imputed_bootstrap")  # Mean AND sd of variance across n bootstraps
+scores_1x   <- readRDS("Results/Imputation/imputed_bootstrap/PCA_scores_boot_summary.rds") # contains mean and sd of the species position over n bootstraps (this is going to be the scatter points & density)
+loadings_1x <- readRDS("Results/Imputation/imputed_bootstrap/PCA_loadings_boot_summary.rds") # contains mean and sd of the trait loadings over n bootstraps + the single bootstrap loadings (this is going to be the arrows + labels)
+variance_1x <- compute_variance_stats("Results/Imputation/imputed_bootstrap")  # Mean AND sd of variance across n bootstraps
 PCA_1x <- list(
   PCA = list(
     scores = scores_1x$mean,
@@ -52,9 +52,9 @@ PCA_1x <- list(
 )
 
 # 2x OOB
-scores_2x   <- readRDS("Results/imputation/imputed_bootstrap_2x/PCA_scores_boot_summary.rds")
-loadings_2x <- readRDS("Results/imputation/imputed_bootstrap_2x/PCA_loadings_boot_summary.rds")
-variance_2x <- compute_variance_stats("Results/imputation/imputed_bootstrap_2x")  # Mean AND sd of variance across n bootstraps
+scores_2x   <- readRDS("Results/Imputation/imputed_bootstrap_2x/PCA_scores_boot_summary.rds")
+loadings_2x <- readRDS("Results/Imputation/imputed_bootstrap_2x/PCA_loadings_boot_summary.rds")
+variance_2x <- compute_variance_stats("Results/Imputation/imputed_bootstrap_2x")  # Mean AND sd of variance across n bootstraps
 PCA_2x <- list(
   PCA = list(
     scores = scores_2x$mean,
