@@ -1,0 +1,8 @@
+analysis,comparison,biome,set,axes_compared,k_compare,metric,obs,p_value,n_shared_species,source_file,k_ref,k_biome,notes,obs_sd,obs_min,obs_max,r_equiv_mean
+biome_groot_vs_global,biome PCA (groot) vs global imputed reference,continental,NA,PC1–PC3,3,procrustes_similarity,0.9627357374066,1e-4,120,NA,4,3,NA,NA,NA,NA,NA
+biome_groot_vs_global,biome PCA (groot) vs global imputed reference,temperate,NA,PC1–PC3,3,procrustes_similarity,0.943846448613219,1e-4,348,NA,4,3,NA,NA,NA,NA,NA
+biome_groot_vs_global,biome PCA (groot) vs global imputed reference,tropical,NA,PC1–PC3,3,procrustes_similarity,0.868303822378683,1e-4,82,NA,4,3,NA,NA,NA,NA,NA
+imputation_vs_notimputed,global imputed reference vs not-imputed (projected),NA,NA,PC1–PC2,2,procrustes_similarity,0.9787231160880331,1e-4,301,procrustes_imputed_ref_vs_notimputed_projected_PC1PC2.rds,NA,NA,NA,NA,NA,NA,NA
+imputation_vs_notimputed,global imputed reference vs not-imputed (projected),NA,NA,PC1–PC4,4,procrustes_similarity,0.9743614945961637,1e-4,301,procrustes_imputed_ref_vs_notimputed_projected_PC1PC4.rds,NA,NA,NA,NA,NA,NA,NA
+oob_imputation_uncertainty,bootstrap imputations vs mean-imputation reference,NA,oob_1x,PC1-PC4,NA,procrustes_residual_m2,0.057607998806741625,NA,1218,NA,NA,NA,NA,8.388061700717977e-4,0.0555828032605364,0.0592280104508809,0.9707686739323221
+oob_imputation_uncertainty,bootstrap imputations vs mean-imputation reference,NA,oob_2x,PC1-PC4,NA,procrustes_residual_m2,0.05811879469758466,NA,1218,NA,NA,NA,NA,0.0016704557733618263,0.0542439858143971,0.0613086640343255,0.9705052702400327

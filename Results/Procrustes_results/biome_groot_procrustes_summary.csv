@@ -1,0 +1,4 @@
+"biome","n_shared_species","k_ref","k_biome","k_compare","axes_compared","obs","p_value","notes"
+"temperate",348,4,3,3,"PC1–PC3",0.943846448613219,1e-04,""
+"tropical",82,4,3,3,"PC1–PC3",0.868303822378683,1e-04,""
+"continental",120,4,3,3,"PC1–PC3",0.9627357374066,1e-04,""

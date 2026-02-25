@@ -1,0 +1,7 @@
+"biome","domain","n_shared_species","axes_used","obs","p_value"
+"temperate","above",71,"PC1-PC2",0.990214030054981,1e-04
+"temperate","below",71,"PC1-PC2",0.970174966042794,1e-04
+"tropical","above",27,"PC1-PC2",0.878088345244385,1e-04
+"tropical","below",27,"PC1-PC2",0.9900749477569,1e-04
+"continental","above",40,"PC1-PC2",0.980005118781544,1e-04
+"continental","below",40,"PC1-PC2",0.701414725253618,1e-04
