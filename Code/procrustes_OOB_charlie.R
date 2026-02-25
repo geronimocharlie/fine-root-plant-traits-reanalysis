@@ -7,7 +7,7 @@
 #
 # What we do (correct concept):
 #   1) Fix ONE reference PCA space using:
-#        OOB_imputation/PCATotal_mean_Imputation.rds
+#        Results/OOB_imputation/PCATotal_mean_Imputation.rds
 #      (assumed to be a PCA object that contains traitsUse scores).
 #   2) For each bootstrap-imputed TRAIT dataset (50 files):
 #        - Standardize using the reference PCA's means/sds
@@ -20,12 +20,12 @@
 #        - full RDS with details
 #
 # Assumptions you stated:
-#   - Everything for this test is inside folder: OOB_imputation/
+#   - Everything for this test is inside folder: Results/OOB_imputation/
 #   - Subfolders:
-#       OOB_imputation/imputed_bootstrap/      (50 .rds files)
+#       Results/OOB_imputation/imputed_bootstrap/      (50 .rds files)
 #       OOB_imputation/imputed_bootstrap_2x/   (50 .rds files)
 #   - Reference PCA objects:
-#       OOB_imputation/PCATotal_mean_Imputation.rds
+#       Results/OOB_imputation/PCATotal_mean_Imputation.rds
 #       (Optional: OOB_imputation/PCATotal_ImputedObs.rds not required)
 #   - Bootstrap files are TRAIT dataframes:
 #       rows = species IDs, cols = traits (numeric), same trait names/order
@@ -48,7 +48,7 @@ set.seed(1)
 ## ----------------------------
 ## 1) Paths
 ## ----------------------------
-oob_dir <- "OOB_imputation"
+oob_dir <- "Results/OOB_imputation"
 
 ref_file <- file.path(oob_dir, "PCATotal_mean_imputation.rds")
 
