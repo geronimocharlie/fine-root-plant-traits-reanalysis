@@ -1,7 +1,7 @@
 # ----- BOOTSTRAP WITH 2x OOB: sensitivity analysis -----
 # Same as 063_multiple_imputation_incrOOB.R, but with noise_sd multiplied by 2
 # to explore sensitivity to OOB-based uncertainty scaling.
-# Results saved to data/imputed_bootstrap_2x/ to avoid overwriting original.
+# Results saved to Results/imputation/imputed_bootstrap_2x/ to avoid overwriting original.
 # Prerequisite: traitsAux, traitsSelect, AllTraitsAllInfo exist (from script 06)
 
 library(missForest)
@@ -12,9 +12,9 @@ library(ks)       # for Hpi.diag()
 source("code/Aux_Functions.R")
 
 # Load traitsAux and traitsSelect from script 06
-traitsAux <- readRDS("data/traitsAux.rds")
-traitsSelect <- readRDS("data/traitsSelect.rds")
-AllTraitsAllInfo <- readRDS("data/imputedTraits.rds")
+traitsAux <- readRDS("Results/imputation/traitsAux.rds")
+traitsSelect <- readRDS("Results/imputation/traitsSelect.rds")
+AllTraitsAllInfo <- readRDS("Results/imputation/imputedTraits.rds")
 
 # 1) run single missForest imputation + report OOB errors per variable
 mf <- missForest(xmis = traitsAux, variablewise = TRUE, verbose = TRUE)
@@ -22,7 +22,7 @@ ximp0 <- mf$ximp                      # full imputed matrix
 imputedTraitsMatrix <- ximp0[, traitsSelect] # select real traits (excludes phylo)
 names(mf$OOBerror) <- colnames(ximp0)
 oob_raw <- mf$OOBerror * 2 # per-variable OOB, scaled by 2.0 for sensitivity analysis
-saveRDS(mf, file = "data/imputedTraits_2xOOB.rds")
+saveRDS(mf, file = "Results/imputation/imputedTraits_2xOOB.rds")
 
 # 2) extract OOB only for real traits (exclude phylo PCs)
 oob_norm <- oob_raw[traitsSelect]
@@ -45,7 +45,7 @@ missing_mat <- is.na(as.matrix(traitsAux)) # logical matrix of missing positions
 
 # 5) Bootstrap settings
 nboot <- 50
-outdir <- "data/imputed_bootstrap_2x"
+outdir <- "Results/imputation/imputed_bootstrap_2x"
 dir.create(outdir, showWarnings = FALSE, recursive = TRUE)
 
 # helper-function to create PCATotal from AllTraitsAllInfo object (copied from 06_Imputed information spectrum.R line 60ff)
@@ -200,7 +200,7 @@ if(length(dim(loadings_array)) == 3){
 
 # --- Compare bootstrap PCs vs. bootstrap PCs (2x)  ---
 # Load 1x OOB results for comparison
-results_1x <- readRDS("data/imputed_bootstrap/PCA_scores_single_vs_boot.rds")
+results_1x <- readRDS("Results/imputation/imputed_bootstrap/PCA_scores_single_vs_boot.rds")
 boot_mean_1x <- results_1x$boot_mean
 boot_sd_1x <- results_1x$boot_sd
 
@@ -253,5 +253,5 @@ if(length(scores_list) > 1){
 }
 
 cat("\n2x OOB sensitivity analysis complete.\n")
-cat("Results saved to: data/imputed_bootstrap_2x/\n")
-cat("Compare with: data/imputed_bootstrap/ (original 1x OOB)\n")
+cat("Results saved to: Results/imputation/imputed_bootstrap_2x/\n")
+cat("Compare with: Results/imputation/imputed_bootstrap/ (original 1x OOB)\n")

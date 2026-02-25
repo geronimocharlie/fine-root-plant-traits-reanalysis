@@ -6,8 +6,8 @@
 #   4. 2x OOB Bootstrap (single)
 #
 # OUTPUT:
-#   Figures/Functional_Space_PC1_PC2_comparison.png
-#   Figures/Functional_Space_PC3_PC4_comparison.png
+#   Results/Figures/Functional_Space_PC1_PC2_comparison.png
+#   Results/Figures/Functional_Space_PC3_PC4_comparison.png
 #
 # Prerequisite: scripts 06, 061, 062, 063 have been run
 
@@ -18,8 +18,8 @@ library(patchwork)  # for combining plots
 # -----------------------------------------------------------------------------
 # Load PCATotal objects
 # -----------------------------------------------------------------------------
-PCA_original <- readRDS("data/PCATotal_ImputedObs.rds")
-PCA_mean     <- readRDS("data/PCATotal_mean_imputation.rds")
+PCA_original <- readRDS("Results/imputation/PCATotal_ImputedObs.rds")
+PCA_mean     <- readRDS("Results/imputation/PCATotal_mean_imputation.rds")
 
 # For bootstrap methods: load aggregated mean scores/loadings and build pseudo-PCATotal
 # compute mean variance across all bootstraps
@@ -39,9 +39,9 @@ compute_variance_stats <- function(outdir) {
 }
 
 # 1x OOB
-scores_1x   <- readRDS("data/imputed_bootstrap/PCA_scores_boot_summary.rds") # contains mean and sd of the species position over n bootstraps (this is going to be the scatter points & density)
-loadings_1x <- readRDS("data/imputed_bootstrap/PCA_loadings_boot_summary.rds") # contains mean and sd of the trait loadings over n bootstraps + the single bootstrap loadings (this is going to be the arrows + labels)
-variance_1x <- compute_variance_stats("data/imputed_bootstrap")  # Mean AND sd of variance across n bootstraps
+scores_1x   <- readRDS("Results/imputation/imputed_bootstrap/PCA_scores_boot_summary.rds") # contains mean and sd of the species position over n bootstraps (this is going to be the scatter points & density)
+loadings_1x <- readRDS("Results/imputation/imputed_bootstrap/PCA_loadings_boot_summary.rds") # contains mean and sd of the trait loadings over n bootstraps + the single bootstrap loadings (this is going to be the arrows + labels)
+variance_1x <- compute_variance_stats("Results/imputation/imputed_bootstrap")  # Mean AND sd of variance across n bootstraps
 PCA_1x <- list(
   PCA = list(
     scores = scores_1x$mean,
@@ -52,9 +52,9 @@ PCA_1x <- list(
 )
 
 # 2x OOB
-scores_2x   <- readRDS("data/imputed_bootstrap_2x/PCA_scores_boot_summary.rds")
-loadings_2x <- readRDS("data/imputed_bootstrap_2x/PCA_loadings_boot_summary.rds")
-variance_2x <- compute_variance_stats("data/imputed_bootstrap_2x")  # Mean AND sd of variance across n bootstraps
+scores_2x   <- readRDS("Results/imputation/imputed_bootstrap_2x/PCA_scores_boot_summary.rds")
+loadings_2x <- readRDS("Results/imputation/imputed_bootstrap_2x/PCA_loadings_boot_summary.rds")
+variance_2x <- compute_variance_stats("Results/imputation/imputed_bootstrap_2x")  # Mean AND sd of variance across n bootstraps
 PCA_2x <- list(
   PCA = list(
     scores = scores_2x$mean,
@@ -226,7 +226,7 @@ for (nm in names(pca_list)) {
   p12 <- plotFunctionalSpace_prob(obj, pc_x = 1, pc_y = 2,
                                   probs = c(0.50, 0.95, 0.99),
                                   title = nm)
-  file_12 <- sprintf("Figures/Functional_Space_%s_PC1_PC2.png", file_stub)
+  file_12 <- sprintf("Results/Figures/Functional_Space_%s_PC1_PC2.png", file_stub)
   ggsave(
     filename = file_12,
     plot = p12,
@@ -238,7 +238,7 @@ for (nm in names(pca_list)) {
   p34 <- plotFunctionalSpace_prob(obj, pc_x = 3, pc_y = 4,
                                   probs = c(0.50, 0.95, 0.99),
                                   title = nm)
-  file_34 <- sprintf("Figures/Functional_Space_%s_PC3_PC4.png", file_stub)
+  file_34 <- sprintf("Results/Figures/Functional_Space_%s_PC3_PC4.png", file_stub)
   ggsave(
     filename = file_34,
     plot = p34,
