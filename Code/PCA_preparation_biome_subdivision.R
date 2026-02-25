@@ -1,11 +1,11 @@
 setwd("C:/Users/katha/OneDrive/2_documents/4_Studium/EMDS_Semester3/Capstone")
 
 # Import data
-rootTraits <- read.table("./data/Root_traits.txt")[, c("SRL", "D", "RTD", "N", "biomesKoeppenGroup")] # already log transformed
-aboveTraits <- read.table("./data/Above_traits.txt")
+rootTraits <- read.table("./Data/Root_traits.txt")[, c("SRL", "D", "RTD", "N", "biomesKoeppenGroup")] # already log transformed
+aboveTraits <- read.table("./Data/Above_traits.txt")
 aboveTraits <- log10(aboveTraits) # log transform 
-aboveTaxonomy <- read.table("./data/Above_taxonomy.txt")
-rootBiomes <- read.table("./data/Root_traits.txt")[, c("biomesKoeppenGroup")]
+aboveTaxonomy <- read.table("./Data/Above_taxonomy.txt")
+rootBiomes <- read.table("./Data/Root_traits.txt")[, c("biomesKoeppenGroup")]
 
 # Clean data/ omit NAs
 rootTraitsComplete <- na.omit(rootTraits) # Species with complete information below ground (748) # with known biomes (380)
@@ -45,7 +45,7 @@ subset_continental_clean <- subset(subset_continental, select = -c(biomesKoeppen
 # ================
 # WITH IMPUTATION
 # ================
-imputed_data <- readRDS("./data/imputedTraits.rds")
+imputed_data <- readRDS("./Data/imputedTraits.rds")
 imputed_data_clean <- subset(imputed_data, select = -c(genus, family, order))
 
 # sorting by root biomes
@@ -56,7 +56,7 @@ common_idx <- intersect(rownames(imputed_data_rootbiomes), rownames(rootTraits))
 imputed_data_rootbiomes[common_idx, "biomesKoeppenGroup"] <- rootTraits[common_idx, "biomesKoeppenGroup"]
 
 # sorting by full biome groups
-biomes <- read.table("./data/biomes_1218sp.txt")
+biomes <- read.table("./Data/biomes_1218sp.txt")
 imputed_data_clean$biomes <- NA
 
 common_idx <- intersect(rownames(imputed_data_clean), rownames(biomes))
@@ -164,7 +164,7 @@ imputed_subset_sd_clean <- subset(imputed_subset_sd, select = -c(biomes, biome_s
 # Save as RDS
 # =============
 fun_save_RDS <- function(file, name){
-            output_file <- paste0("PCA_data/", name, ".rds")
+            output_file <- paste0("Data/", name, ".rds")
             saveRDS(file, output_file)}
 
 # save files root biomes
@@ -205,6 +205,8 @@ fun_save_RDS(imputed_data_clean, "imputed_combined") # recreating paper
 fun_save_RDS(imputed_data_half, "imputed_combined_half") # for stability test
 fun_save_RDS(imputed_data_quarter, "imputed_combined_quarter")
 fun_save_RDS(imputed_data_tenth, "imputed_combined_tenth")
+
+
 
 
 
