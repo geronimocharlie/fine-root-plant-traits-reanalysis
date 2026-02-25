@@ -45,7 +45,7 @@ subset_continental_clean <- subset(subset_continental, select = -c(biomesKoeppen
 # ================
 # WITH IMPUTATION
 # ================
-imputed_data <- readRDS("./data/imputedTraits.rds")
+imputed_data <- readRDS("./Data/imputedTraits.rds")
 imputed_data_clean <- subset(imputed_data, select = -c(genus, family, order))
 
 # sorting by root biomes
@@ -56,7 +56,7 @@ common_idx <- intersect(rownames(imputed_data_rootbiomes), rownames(rootTraits))
 imputed_data_rootbiomes[common_idx, "biomesKoeppenGroup"] <- rootTraits[common_idx, "biomesKoeppenGroup"]
 
 # sorting by full biome groups
-biomes <- read.table("./data/biomes_1218sp.txt")
+biomes <- read.table("./Data/biomes_1218sp.txt")
 imputed_data_clean$biomes <- NA
 
 common_idx <- intersect(rownames(imputed_data_clean), rownames(biomes))
@@ -205,6 +205,7 @@ fun_save_RDS(imputed_data_clean, "imputed_combined") # recreating paper
 fun_save_RDS(imputed_data_half, "imputed_combined_half") # for stability test
 fun_save_RDS(imputed_data_quarter, "imputed_combined_quarter")
 fun_save_RDS(imputed_data_tenth, "imputed_combined_tenth")
+
 
 
 
