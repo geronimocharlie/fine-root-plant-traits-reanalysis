@@ -19,6 +19,10 @@ Reproducible R scripts and results
     - Imputation/
     - Tables/
     - Procrustes_results/
+
+## Notes
+
+Due to data amount restrictions, not all results could be uploaded. To obtain the full set of analyses and outputs, please run the scripts locally.
   
 
 
