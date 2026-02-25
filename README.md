@@ -12,7 +12,7 @@ Reproducible R scripts and results
 - Code/: R scripts for all analyses
     - Imputation Uncertainty: 061–065
     - Regionality: PCA_preparation, PCA_reanalysis, PCA_visualization
-    - Robustness: procrustes*, proc*, procr*, etc.
+    - Robustness: procrustes*
     - Varimax Rotation: varimax_rotation_graphic
 - Results/:
     - Figures/
