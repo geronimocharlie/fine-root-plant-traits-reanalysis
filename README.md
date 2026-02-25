@@ -6,7 +6,7 @@ This repository revisits the global plant trait spectrum by independently testin
 - Reanalysis of the global spectrum of plant form and function (GSPFF)
 - Robustness tests across rotation, imputation, uncertainty propagation, and biome-specific ordinations
 - Clarifies the dimensionality and interpretation of trait decoupling
-Reproducible R scripts and results
+- Reproducible R scripts and results
 
 ## Folder Structure
 - Code/: R scripts for all analyses
@@ -21,7 +21,6 @@ Reproducible R scripts and results
     - Procrustes_results/
 
 ## Notes
-
 Due to data amount restrictions, not all results could be uploaded. To obtain the full set of analyses and outputs, please run the scripts locally.
   
 
